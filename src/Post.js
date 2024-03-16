@@ -58,7 +58,7 @@ const Post = () => {
   };
 
   return (
-    <div>
+    <div className='post'>
       <h3>Add a Post</h3>
       <input
         type="text"
