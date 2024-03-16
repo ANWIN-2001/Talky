@@ -1,3 +1,4 @@
+// Post.js
 import React, { useState } from 'react';
 import CommentForm from './CommentForm';
 import LikeButton from './LikeButton';
@@ -24,12 +25,11 @@ const Post = () => {
         comments: [],
         reacted: false,
       };
-      setPosts([...posts, newPost]); // Append new post to the existing array
+      setPosts([...posts, newPost]);
       setTopic('');
       setContent('');
     }
   };
-  
 
   const addComment = (postId, comment) => {
     const updatedPosts = posts.map(post => {
@@ -81,9 +81,14 @@ const Post = () => {
           <h4>Comments:</h4>
           <ul>
             {post.comments.map((comment, index) => (
-              <li key={index}>{comment}</li>
+              <li key={index}>
+                {comment}
+                {/* LikeButton for reacting to comments */}
+                <LikeButton postId={post.id} commentIndex={index} onReaction={handleReaction} />
+              </li>
             ))}
           </ul>
+          {/* CommentForm for adding comments */}
           <CommentForm postId={post.id} addComment={addComment} />
         </div>
       ))}

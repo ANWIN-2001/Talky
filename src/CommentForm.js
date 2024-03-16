@@ -1,12 +1,13 @@
+// CommentForm.js
 import React, { useState } from 'react';
 
-const CommentForm = ({ addComment }) => {
+const CommentForm = ({ postId, addComment }) => {
   const [comment, setComment] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!comment.trim()) return;
-    addComment(comment);
+    addComment(postId, comment); // Include postId when submitting comment
     setComment('');
   };
 
