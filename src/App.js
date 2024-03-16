@@ -1,27 +1,12 @@
 import React from 'react';
 import './App.css';
-import PostList from './PostList';
-
-const posts = [
-  {
-    id: 1,
-    title: 'Post 1',
-    body: 'Lorem ipsum dolor sit amet.',
-    comments: ['Comment 1', 'Comment 2'],
-  },
-  {
-    id: 2,
-    title: 'Post 2',
-    body: 'Consectetur adipiscing elit.',
-    comments: ['Comment 3'],
-  },
-];
+import Post from './Post'; // Import the Post component
 
 function App() {
   return (
     <div className="App">
       <h1>Post Comment Like App</h1>
-      <PostList posts={posts} />
+      <Post /> {/* Render the Post component */}
     </div>
   );
 }

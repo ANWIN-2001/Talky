@@ -2,26 +2,91 @@ import React, { useState } from 'react';
 import CommentForm from './CommentForm';
 import LikeButton from './LikeButton';
 
-const Post = ({ post }) => {
-  const [comments, setComments] = useState(post.comments || []);
+const Post = () => {
+  const [posts, setPosts] = useState([]);
+  const [topic, setTopic] = useState('');
+  const [content, setContent] = useState('');
 
-  const addComment = comment => {
-    const newComments = [...comments, comment];
-    setComments(newComments);
+  const handleTopicChange = event => {
+    setTopic(event.target.value);
+  };
+
+  const handleContentChange = event => {
+    setContent(event.target.value);
+  };
+
+  const addPost = () => {
+    if (topic.trim() !== '' && content.trim() !== '') {
+      const newPost = {
+        id: Date.now(),
+        title: topic,
+        body: content,
+        comments: [],
+        reacted: false,
+      };
+      setPosts([...posts, newPost]); // Append new post to the existing array
+      setTopic('');
+      setContent('');
+    }
+  };
+  
+
+  const addComment = (postId, comment) => {
+    const updatedPosts = posts.map(post => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          comments: [...post.comments, comment],
+        };
+      }
+      return post;
+    });
+    setPosts(updatedPosts);
+  };
+
+  const handleReaction = (postId, reaction) => {
+    const updatedPosts = posts.map(post => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          reacted: reaction,
+        };
+      }
+      return post;
+    });
+    setPosts(updatedPosts);
   };
 
   return (
     <div>
-      <h3>{post.title}</h3>
-      <p>{post.body}</p>
-      <LikeButton />
-      <h4>Comments:</h4>
-      <ul>
-        {comments.map((comment, index) => (
-          <li key={index}>{comment}</li>
-        ))}
-      </ul>
-      <CommentForm addComment={addComment} />
+      <h3>Add a Post</h3>
+      <input
+        type="text"
+        placeholder="Enter topic"
+        value={topic}
+        onChange={handleTopicChange}
+      />
+      <textarea
+        placeholder="Enter post content"
+        value={content}
+        onChange={handleContentChange}
+      />
+      <button onClick={addPost}>Post</button>
+
+      {posts.map(post => (
+        <div key={post.id}>
+          <h3>{post.title}</h3>
+          <p>{post.body}</p>
+          <LikeButton postId={post.id} onReaction={handleReaction} reacted={post.reacted} />
+          <h4>Comments:</h4>
+          <ul>
+            {post.comments.map((comment, index) => (
+              <li key={index}>{comment}</li>
+            ))}
+          </ul>
+          <CommentForm postId={post.id} addComment={addComment} />
+        </div>
+      ))}
     </div>
   );
 };
