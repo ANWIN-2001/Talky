@@ -72,24 +72,26 @@ export default function Post() {
     });
     setPosts(updatedPosts);
   };
+//imp line bellow
+  // return (
+  //   <div>
+  //     {posts.length === 0 ? (
+  //       <p>No Posts found!</p>
+  //     ) : (
+  //       posts.map(({id,title,content,createdAt}) => (
+  //         <div className='created' key={id}>
+  //           <div className='row'>
+  //              <h2>{title}</h2>
+  //              <p>{createdAt.toDate().toDateString()}</p>
+  //              <h4>{content}</h4>
+  //           </div>  
+  //         </div>
+  //       ))
+  //     )}
+  //   </div>
+  // );
 
-  return (
-    <div>
-      {posts.length === 0 ? (
-        <p>No Posts found!</p>
-      ) : (
-        posts.map(({id,title,content,createdAt}) => (
-          <div className='created' key={id}>
-            <div className='row'>
-               <h2>{title}</h2>
-               <p>{createdAt.toDate().toDateString()}</p>
-               <h4>{content}</h4>
-            </div>  
-          </div>
-        ))
-      )}
-    </div>
-  );
+//imp line above
 
   // return (
   //   <div className='post'>
