@@ -5,23 +5,46 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: #fafafa;
 }
 
 /* Container styles */
 .App {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #fafafa;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
 /* Heading styles */
 h1 {
-  text-align: center;
+  padding-top: 10px;
+  text-align: left;
   color: #333;
+  font-family: "Festive", cursive;
+  font-weight: 500;
+  font-style: normal;
+}
+
+img{
+  padding: 5px;
+  height: 35px;
+  width: 30px;
+}
+
+.post {
+  max-width: 800px;
+  background-color: #f1f1f1;
+  padding: 30px;
+  border-radius: 10px;
 }
 
 /* Like and Dislike button container */
