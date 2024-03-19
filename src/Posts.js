@@ -24,54 +24,54 @@ export default function Post() {
     });
   },[]);
 
-  const handleTopicChange = event => {
-    setTopic(event.target.value);
-  };
+  // const handleTopicChange = event => {
+  //   setTopic(event.target.value);
+  // };
  
-  const handleContentChange = event => {
-    setContent(event.target.value);
-  };
+  // const handleContentChange = event => {
+  //   setContent(event.target.value);
+  // };
 
-  const addPost = () => {
-    if (topic.trim() !== '' && content.trim() !== '') {
-      const newPost = {
-        id: Date.now(),
-        title: topic,
-        body: content,
-        comments: [],
-        reacted: false,
-      };
-      setPosts([...posts, newPost]);
-      setTopic('');
-      setContent('');
-    }
-  };
+  // const addPost = () => {
+  //   if (topic.trim() !== '' && content.trim() !== '') {
+  //     const newPost = {
+  //       id: Date.now(),
+  //       title: topic,
+  //       body: content,
+  //       comments: [],
+  //       reacted: false,
+  //     };
+  //     setPosts([...posts, newPost]);
+  //     setTopic('');
+  //     setContent('');
+  //   }
+  // };
 
-  const addComment = (postId, comment) => {
-    const updatedPosts = posts.map(post => {
-      if (post.id === postId) {
-        return {
-          ...post,
-          comments: [...post.comments, comment],
-        };
-      }
-      return post;
-    });
-    setPosts(updatedPosts);
-  };
+  // const addComment = (postId, comment) => {
+  //   const updatedPosts = posts.map(post => {
+  //     if (post.id === postId) {
+  //       return {
+  //         ...post,
+  //         comments: [...post.comments, comment],
+  //       };
+  //     }
+  //     return post;
+  //   });
+  //   setPosts(updatedPosts);
+  // };
 
-  const handleReaction = (postId, reaction) => {
-    const updatedPosts = posts.map(post => {
-      if (post.id === postId) {
-        return {
-          ...post,
-          reacted: reaction,
-        };
-      }
-      return post;
-    });
-    setPosts(updatedPosts);
-  };
+  // const handleReaction = (postId, reaction) => {
+  //   const updatedPosts = posts.map(post => {
+  //     if (post.id === postId) {
+  //       return {
+  //         ...post,
+  //         reacted: reaction,
+  //       };
+  //     }
+  //     return post;
+  //   });
+  //   setPosts(updatedPosts);
+  // };
 //imp line bellow
   // return (
   //   <div>

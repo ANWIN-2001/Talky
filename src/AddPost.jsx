@@ -148,8 +148,8 @@ export default function Post() {
 
   const addPostComment = async (postId, comment) => {
     try {
-      const postRef = collection(db, "Posts");
-      await addDoc(postRef, {
+      const commentRef = collection(db, "comments");
+      await addDoc(commentRef, {
         postId: postId,
         comment: comment,
         createdAt: Timestamp.now().toDate()
