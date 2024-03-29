@@ -1,5 +1,6 @@
 // CommentForm.js
 import React, { useState } from 'react';
+// import AddPost from './AddPost';
 
 const CommentForm = ({ postId, addComment }) => {
   const [comment, setComment] = useState('');
@@ -21,6 +22,7 @@ const CommentForm = ({ postId, addComment }) => {
       />
       <button type="submit">Add Comment</button>
     </form>
+
   );
 };
 

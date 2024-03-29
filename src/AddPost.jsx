@@ -85,6 +85,10 @@ export default function Post() {
     topic: "",
     content: ""
   });
+  const [comments, setComments] = useState([]);
+  const [Newcomment, setNewComment] = useState({
+    comment: ""
+  });
 
   useEffect(()=>{
     const articleRef = collection(db,"Posts");
@@ -98,13 +102,32 @@ export default function Post() {
     });
   },[]);
 
+  useEffect(()=>{
+    const commentRef = collection(db,"comments");
+    const q = query(commentRef, orderBy("createdAt", "desc"));
+    onSnapshot(q,(snapshot) => {
+      const posts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setComments(comments);
+    });
+  },[]);
+
   const handleTopicChange = (event) => {
-    setNewPost({ ...newPost, topic: event.target.value });
+    setNewPost({ ...newPost, topic: event.target.value});
   };
  
   const handleContentChange = (event) => {
     setNewPost({ ...newPost, content: event.target.value });
   };
+
+    const handleCommentChange =(event) => {
+      event.preventDefault();
+      if (!comments.trim()) return;
+      // addComment(postId, comment); // Include postId when submitting comment
+      setComments({ ...comments, comment: event.target.value});
+    };
 
   const addNewPost = async () => {
     try {
@@ -146,7 +169,7 @@ export default function Post() {
     }
   };
 
-  const addPostComment = async (postId, comment) => {
+  const addComment = async (postId, comment) => {
     try {
       const commentRef = collection(db, "comments");
       await addDoc(commentRef, {
@@ -189,12 +212,40 @@ export default function Post() {
                <p>{createdAt.toDate().toDateString()}</p>
                <h4>{content}</h4>
                <LikeButton postId={id} onReaction={addPostReaction} />
-               <CommentForm postId={id} addComment={addPostComment} />
-            </div>  
-          </div>
-        ))
-      )}
+               {/* <CommentForm postId={id} addComment={addPostComment} /> */}
+               </div>
+               </div>
+               ))
+          )};
+               <form>
+                  <input
+                    type="text"
+                    value={comments.comment}
+                    onChange={handleCommentChange}
+                    placeholder="Add a comment..."
+                  />
+                  <button type="submit" onClick={addComment}>Add Comment</button>
+                </form>
+
+                {comments.length === 0 ? (
+                    <p>No Posts found!</p>
+                  ) : (
+                    comments.map(({postId,comment}) => (
+                      <div className='created' key={postId}>
+                        <div className='row'>
+                          <p>{comment}</p>
+                          {/* <p>{createdAt.toDate().toDateString()}</p> */}
+                          {/* <h4>{content}</h4> */}
+                          {/* <LikeButton postId={id} onReaction={addPostReaction} />
+                          <CommentForm postId={id} addComment={addPostComment} /> */}
+                        </div>  
+                      </div>
+                    ))
+                  )};
+
+               
+       
       <ToastContainer />
     </div>
   );
-}
+};
